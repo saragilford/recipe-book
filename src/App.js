@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { RecipeForm } from './RecipeForm'
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: [
+        { title: 'Honey Chicken', url: '#' },
+        { title: 'Thai Salad', url: '#' },
+        { title: 'Popsicles', url: '#' },
+        { title: 'Ottolenghi Dip', url: '#' },
+      ]
+    }
+  }
   render() {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h1>Recipe Book!</h1>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div>
+          <ul>
+            {this.state.data.map(function(item){
+              return <li><a href={item.url}>{item.title}</a></li>
+            })}
+          </ul>
+        </div>
+        <RecipeForm onSubmit={this.onAddRecipe.bind(this)}/>
       </div>
     );
+  }
+  onAddRecipe(name, link){
+    console.log(name, link)
   }
 }
 
